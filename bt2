@@ -1,0 +1,280 @@
+package bt2;
+
+import java.util.Scanner;
+
+public class KhachHang {
+	private int MaKH, SoLuong;
+	private double DonGia, ThanhTien;
+	private String NgayRHD,HoTenKH;
+	Scanner sc = new Scanner (System.in);
+	
+	public KhachHang () {		
+	}
+	
+	public KhachHang(int MaKH, int SoLuong, double DonGia, double ThanhTien, String NgayRHD, String HoTenKH) {
+		this.MaKH = MaKH;
+		this.SoLuong = SoLuong;
+		this.DonGia = DonGia;
+		this.ThanhTien = ThanhTien;
+		this.NgayRHD = NgayRHD;
+		this.HoTenKH = HoTenKH;
+	}
+	
+	public int getMaKH() {
+		return MaKH;
+	}
+	public void setMaKH(int MaKH) {
+		this.MaKH = MaKH;
+	}
+	public int getSoLuong() {
+		return SoLuong;
+	}
+	public void setSoLuong(int SoLuong) {
+		this.SoLuong = SoLuong;
+	}
+	public double getDonGia() {
+		return DonGia;
+	}
+	public void setDonGia( double DonGia) {
+		this.DonGia = DonGia;
+	}
+	public double getThanhTien() {
+		return ThanhTien;
+	}
+	public void setThanhTien(double ThanhTien) {
+		this.ThanhTien = ThanhTien;
+	}
+	public String getNgayRHD() {
+		return NgayRHD;
+	}
+	public void setNgayRHD(String NgayRHD) {
+		this.NgayRHD = NgayRHD;
+	}
+	public String getHoTenKH() {
+		return HoTenKH;
+	}
+	public void setHoTenKH (String HoTenKH) {
+		this.HoTenKH = HoTenKH;
+	}
+	public void nhap() {
+		System.out.println ("Nhap ma khach hang:");
+		MaKH=sc.nextInt();
+		System.out.println ("Nhap ho va ten khach hang:");
+		HoTenKH=sc.nextLine();
+		System.out.println ("Nhap ngay lap hoa don:");
+		NgayRHD=sc.nextLine();
+		System.out.println ("So luong KW");
+		SoLuong=sc.nextInt();
+		System.out.println ("Don gia:");
+		DonGia=sc.nextDouble();
+	}
+	@Override
+	public String toString() {
+		return " MaKH=" + MaKH + ", SoLuong=" + SoLuong + ", DonGia=" + DonGia + ", ThanhTien=" + ThanhTien + ", NgayRHD=" + NgayRHD + ", HoTenKH=" + HoTenKH ;
+	}
+}
+package bt2;
+
+public class KhachHangNuocNgoai extends KhachHang {
+	private String QuocTich;
+	
+	public KhachHangNuocNgoai() {
+	}
+	public KhachHangNuocNgoai(int ma, double dgia, String ngay, String hoten,int sl, double ttien, String qt) {		
+		this.QuocTich=qt;
+    }
+    public String getQuocTich() {
+	    return QuocTich;
+	}
+	public void setQuocTich(String quocTich) {
+		QuocTich = quocTich;
+	}
+	public void nhap()
+	{
+		super.nhap();
+		System.out.println("Quoc Tich: ");
+		QuocTich = sc.next();
+	}
+	public double TTien()
+	{
+		return this.ThanhTien = this.SoLuong*this.DonGia;
+	}
+	@Override
+	public String toString()
+	{
+		return "KhachHangNuocNgoai("+toString() + "QuocTich=" + QuocTich + '}';
+	}
+
+}
+package bt2;
+
+public class KhachHangViet extends KhachHang {
+	private int LoaiKH, DinhMuc;
+	
+	public KhachHangViet() {
+	}
+	
+	public KhachHangViet (int LoaiKH, int DinhMuc) {
+		this.LoaiKH = LoaiKH;
+		this.DinhMuc = DinhMuc;
+	}
+	public int getLoaiKH() {
+		return LoaiKH;
+	}
+	public void setLoaiKH(int LoaiKH) {
+		this.LoaiKH = LoaiKH;
+	}
+
+	public int getDinhMuc() {
+		return DinhMuc;
+	}
+
+	public void setDinhMuc(int dinhMuc) {
+		DinhMuc = dinhMuc;
+	}
+	public void nhap() {
+		System.out.println("Loai khach hang (1. Sinh hoat 2.Kinh doanh 3.San Xuat)");
+		LoaiKH=sc.nextInt();
+		System.out.println("Dinh muc:");
+		DinhMuc=sc.nextInt();
+	}
+	public double TTien() {
+		if(SoLuong<=DinhMuc) {
+			return this.ThanhTien=this.DonGia*this.SoLuong;
+		}
+		else {
+			return this.ThanhTien=this.DinhMuc*this.DonGia + (this.SoLuongthis.DinhMuc)*this.DonGia*2.5;
+		}
+	}
+
+	@Override
+	public String toString() {
+		String temp;
+		if(LoaiKH==1) {
+			temp="Sinh hoat";
+		}
+		else if(LoaiKH==2)
+		{
+			temp="Kinh doanh";
+		}
+		else {
+			temp="San xuat";
+		}
+		return "KhachHangViet ["+toString()+"LoaiKH=" + temp + ", DinhMuc=" + DinhMuc + "]";
+	}
+
+}
+package bt2;
+
+public class KhachHangList {
+		private KhachHang kh[]= new KhachHang[100];
+		private int  CountKH, sum1=0, sum2=0, dem=0, sumtien=0;
+			public KhachHangList() {
+			CountKH =0;
+			for (int i =0 ; i<100; i++) {
+				kh[i] = new KhachHang();
+				
+			}
+			}
+			public void ThemKH(int temp) {
+				if (CountKH>100) {
+					System.out.println("Bo nho day ");
+				}
+				else {
+					if(temp==1)
+					{
+						kh[CountKH]= new KhachHangViet();
+						KhachHangViet khv = new KhachHangViet();
+						khv.nhap();
+						khv.ThanhTien= khv.TTien();
+						kh[CountKH]=khv;
+						sum1+=khv.SoLuong;
+					}
+					else {
+						kh[CountKH]= new KhachHangNuocNgoai();
+						KhachHangNuocNgoai khnn= new KhachHangNuocNgoai();
+						khnn.nhap();
+						khnn.ThanhTien=khnn.TTien();
+						kh[CountKH]= khnn;
+						sum2+=khnn.SoLuong;
+						sumtien += khnn.ThanhTien;
+					}
+					dem++;
+					CountKH++;
+				}
+			}
+		public void HienThi() {
+			for (int i=0; i< CountKH ;i++) {
+				System.out.println("So TT"+ (i+1));
+				System.out.println(kh[i].toString());
+			}
+		}
+		public void TongSL() {
+			System.out.println("Tong so luong (KW) dien cua khach hang Viet"+sum1);
+			System.out.println("Tong so luong (KW) dien cua khach hang nuoc ngoai"+sum2);
+		}
+		public void TrungBinh() {
+			System.out.println("Trung binh thanh tien cua khach nuoc ngoai: "+(sumtien/dem));
+		}
+		public void checkDate() {
+			String Date = "5/2023",Date1;
+			for(int i; i<CountKH; i++) {
+				Date1= kh[i].getNgayRHD();
+				String[] date1= Date.split("/");
+				String[] date2= Date.split("/");
+				int month1= Integer.parseInt(date1[0]);
+				int year1= Integer.parseInt(date1[1]);
+				int month2= Integer.parseInt(date2[0]);
+				int year2= Integer.parseInt(date2[1]);
+				if (month1==month2&&year1==year2) {
+					System.out.println(kh[i].toString());
+				}
+			}
+		}
+		}
+
+
+}
+package bt2;
+import java.util.Scanner;
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		KhachHangList listKH = new KhachHangList();
+		Scanner sc = new Scanner(System.in);
+		int x;
+		do {
+			System.out.println("1.Them khach hang Viet");
+			System.out.println("2.Them khach hang nuoc ngoai");
+			System.out.println("3.Hien thi danh sach khach hang");
+			System.out.println("4.Xem tong(KW) cua cac khach hang");
+			System.out.println("5.Xem trung binh thanh tien của khach hang nuoc ngoai");
+			System.out.println("6.Xuat danh sach khach hang thang 5/2023");
+			x=sc.nextInt();
+			switch(x) {
+			case 1:
+				listKH.ThemKH(1);
+				break;
+			case 2:
+				listKH.ThemKH(2);
+				break;
+			case 3:
+				listKH.HienThi();
+				break;
+			case 4:
+				listKH.TongSL();
+				break;
+			case 5:
+				listKH.TrungBinh();
+				break;
+			case 6:
+				listKH.checkDate();
+				break;
+			}
+		}while (x!=0);
+
+	}
+
+}
+
